@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using BeerTaps.Domain.Models;
 
 namespace BeerTaps.Domain.Services
@@ -11,6 +12,7 @@ namespace BeerTaps.Domain.Services
 		BeerTapDto Get(int officeId, int id);
 		void Delete(int officeId, int id);
 		IEnumerable<BeerTapDto> GetAll();
+		IEnumerable<BeerTapDto> GetAllAtOfficeId(int officeId);
 		BeerTapDto Update(BeerTapDto beerTap);
 	}
 
@@ -56,8 +58,7 @@ namespace BeerTaps.Domain.Services
 			_beerTaps.Add(Tuple.Create(beerTap.OfficeId, beerTap.Id), beerTap);
 			return beerTap;
 		}
-
-		// Get needs to get based on OfficeId and Id
+		
 		public BeerTapDto Get(int officeId, int id)
 		{
 			return _beerTaps.FirstOrDefault(x => x.Key.Equals(Tuple.Create(officeId, id))).Value;
@@ -71,6 +72,12 @@ namespace BeerTaps.Domain.Services
 		public IEnumerable<BeerTapDto> GetAll()
 		{
 			return _beerTaps.Values;
+		}
+
+		public IEnumerable<BeerTapDto> GetAllAtOfficeId(int officeId)
+		{
+			//return _beerTaps.Where(x => x.Key.Item1.Equals(officeId)).Values;
+			return _beerTaps.Values.Where(x => x.OfficeId.Equals(officeId));
 		}
 
 		public BeerTapDto Update(BeerTapDto beerTap)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,46 +32,32 @@ namespace BeerTaps.ApiServices.Services
 //	        _toTransportMapper = mapperFactory.Create<BeerTap, BeerTapDto>();
         }
 
+	    private static int EnsureOfficeIdIsSetInContext(IRequestContext context)
+	    {
+			var officeId = context.UriParameters.GetByName<int>("OfficeId").EnsureValue();
+			var linkParameter = new BeerTapLinkParameter(officeId);
+			context.LinkParameters.Set(linkParameter);
+
+		    return officeId;
+	    }
+
         public Task<BeerTap> GetAsync(int id, IRequestContext context, CancellationToken cancellation)
         {
-            var officeId = context.UriParameters.GetByName<int>("OfficeId").EnsureValue();
-	        var linkParameter = new BeerTapLinkParameter(officeId);
-	        context.LinkParameters.Set(linkParameter);
-
-			// Implement get using OfficeId and Id
+	        var officeId = EnsureOfficeIdIsSetInContext(context);
+			
+			// Grab and return the BeerTap associated with the officeId and id
 	        BeerTap beerTapToReturn = _toResourceMapper.Map(_beerTapService.Get(officeId, id));
 
 	        return Task.FromResult(beerTapToReturn);
-
-//	        BeerTap b;
-//	        if (id == 1)
-//	        {
-//				b = new BeerTap
-//				{
-//					Id = id,
-//					BeerName = "Granville Island Pale Ale",
-//					OfficeId = officeId,
-//					KegState = KegState.Full
-//				};
-//			}
-//	        else
-//	        {
-//				b = new BeerTap
-//				{
-//					Id = id,
-//					BeerName = "Rebellion Stout",
-//					OfficeId = officeId,
-//					KegState = KegState.GoingDown
-//				};
-//			}
-//			
-//            return Task.FromResult(b);
         }
 
         public Task<IEnumerable<BeerTap>> GetManyAsync(IRequestContext context, CancellationToken cancellation)
         {
-			// Implement ViewAllKegs
-            throw new NotImplementedException();
+			var officeId = EnsureOfficeIdIsSetInContext(context);
+
+	        return Task.FromResult(_beerTapService.GetAllAtOfficeId(officeId).Select(_toResourceMapper.Map));
+
+	        //return Task.FromResult(_beerTapService.GetAll().Select(_toResourceMapper.Map));
         }
 
         public Task<ResourceCreationResult<BeerTap, int>> CreateAsync(BeerTap resource, IRequestContext context, CancellationToken cancellation)
