@@ -1,0 +1,11 @@
+c:\users\jonathon.wells\documents\visual studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Model\obj\Debug\BeerTaps.Model.csprojResolveAssemblyReference.cache
+c:\users\jonathon.wells\documents\visual studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Model\bin\Debug\BeerTaps.Model.XML
+c:\users\jonathon.wells\documents\visual studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Model\bin\Debug\BeerTaps.Model.dll
+c:\users\jonathon.wells\documents\visual studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Model\bin\Debug\BeerTaps.Model.pdb
+c:\users\jonathon.wells\documents\visual studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Model\bin\Debug\IQ.Platform.Framework.Common.dll
+c:\users\jonathon.wells\documents\visual studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Model\bin\Debug\IQ.Platform.Framework.WebApi.Model.dll
+c:\users\jonathon.wells\documents\visual studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Model\bin\Debug\Newtonsoft.Json.dll
+c:\users\jonathon.wells\documents\visual studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Model\bin\Debug\IQ.Platform.Framework.WebApi.Model.xml
+c:\users\jonathon.wells\documents\visual studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Model\bin\Debug\Newtonsoft.Json.xml
+c:\users\jonathon.wells\documents\visual studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Model\obj\Debug\BeerTaps.Model.dll
+c:\users\jonathon.wells\documents\visual studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Model\obj\Debug\BeerTaps.Model.pdb

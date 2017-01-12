@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BeerTaps.Model</name>
+    </assembly>
+    <members>
+        <member name="P:BeerTaps.Model.Interfaces.IStatefulBeerTap.KegState">
+            <summary>
+            Interface allowing state getter
+            </summary>
+        </member>
+        <member name="T:BeerTaps.Model.LinkRelations">
+            <summary>
+            iQmetrix link relation names
+            </summary>
+        </member>
+        <member name="F:BeerTaps.Model.LinkRelations.Office">
+            <summary>
+            link relation to describe the Office resource.
+            </summary>
+        </member>
+        <member name="F:BeerTaps.Model.LinkRelations.BeerTap">
+            <summary>
+            link relation to describe the BeerTap resource
+            </summary>
+        </member>
+        <member name="F:BeerTaps.Model.LinkRelations.BeerTaps.PluralBeerTaps">
+            <summary>
+            Link to describe multiple beer taps
+            </summary>
+        </member>
+        <member name="F:BeerTaps.Model.LinkRelations.BeerTaps.ReplaceKeg">
+            <summary>
+            Action link to describe replacing a keg
+            </summary>
+        </member>
+        <member name="F:BeerTaps.Model.LinkRelations.BeerTaps.Pour">
+            <summary>
+            Action link to describe pour a pint
+            </summary>
+        </member>
+        <member name="F:BeerTaps.Model.LinkRelations.BeerTaps.CheckKegStatus">
+            <summary>
+            Action link to describe checking the keg's state
+            </summary>
+        </member>
+        <member name="T:BeerTaps.Model.Resources.BeerTap">
+            <summary>
+            BeerTap resource with four states - Full, GoingDown, NearlyEmpty, Empty
+            </summary>
+        </member>
+        <member name="P:BeerTaps.Model.Resources.BeerTap.Id">
+            <summary>
+            Unique Identifier for the BeerTap
+            </summary>
+        </member>
+        <member name="P:BeerTaps.Model.Resources.BeerTap.BeerName">
+            <summary>
+            Name of the beer
+            </summary>
+        </member>
+        <member name="P:BeerTaps.Model.Resources.BeerTap.KegState">
+            <summary>
+            State of the keg
+            </summary>
+        </member>
+        <member name="P:BeerTaps.Model.Resources.BeerTap.OfficeId">
+            <summary>
+            ID for the office containing the BeerTap
+            </summary>
+        </member>
+        <member name="T:BeerTaps.Model.Resources.Office">
+            <summary>
+            A Sample Resource, used as a placeholder. To be removed after real-world API resources have been added.
+            </summary>
+        </member>
+        <member name="P:BeerTaps.Model.Resources.Office.Id">
+            <summary>
+            Unique Identifier for the Office
+            </summary>
+        </member>
+        <member name="P:BeerTaps.Model.Resources.Office.Location">
+            <summary>
+            Location string for the Office
+            </summary>
+        </member>
+        <member name="F:BeerTaps.Model.States.KegState.Full">
+            <summary>
+            The keg is fresh and full
+            Pour, CheckKegState
+            </summary>
+        </member>
+        <member name="F:BeerTaps.Model.States.KegState.GoingDown">
+            <summary>
+            The keg has given a few pints
+            Pour, CheckKegState
+            </summary>
+        </member>
+        <member name="F:BeerTaps.Model.States.KegState.NearlyEmpty">
+            <summary>
+            The keg has given almost all it can
+            Pour, CheckKegState, ReplaceKeg
+            </summary>
+        </member>
+        <member name="F:BeerTaps.Model.States.KegState.BoneDry">
+            <summary>
+            Replace the poor bastard
+            CheckKegState, ReplaceKeg
+            </summary>
+        </member>
+    </members>
+</doc>

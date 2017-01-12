@@ -1,0 +1,5 @@
+C:\Users\Jonathon.Wells\Documents\Visual Studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Domain\bin\Debug\BeerTaps.Domain.dll
+C:\Users\Jonathon.Wells\Documents\Visual Studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Domain\bin\Debug\BeerTaps.Domain.pdb
+C:\Users\Jonathon.Wells\Documents\Visual Studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Domain\obj\Debug\BeerTaps.Domain.csprojResolveAssemblyReference.cache
+C:\Users\Jonathon.Wells\Documents\Visual Studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Domain\obj\Debug\BeerTaps.Domain.dll
+C:\Users\Jonathon.Wells\Documents\Visual Studio 2015\Projects\BeerTaps\BeerTaps\BeerTaps.Domain\obj\Debug\BeerTaps.Domain.pdb
