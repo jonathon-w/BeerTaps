@@ -6,7 +6,7 @@ using IQ.Platform.Framework.WebApi.Model.Hypermedia;
 namespace BeerTaps.Model.Resources
 {
     /// <summary>
-    /// A Sample Resource, used as a placeholder. To be removed after real-world API resources have been added.
+    /// An Office with an Id and Location, links to BeerTaps
     /// </summary>
     public class Office : IStatelessResource, IIdentifiable<int>
     {

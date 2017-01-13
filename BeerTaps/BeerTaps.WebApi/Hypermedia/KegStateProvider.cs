@@ -32,25 +32,25 @@ namespace BeerTaps.WebApi.Hypermedia
 						KegState.GoingDown
 					}
 				},
-//				{
-//					KegState.GoingDown, new[]
-//					{
-//						KegState.NearlyEmpty
-//					}
-//				},
-//				{
-//					KegState.NearlyEmpty, new[]
-//					{
-//						KegState.Full,
-//						KegState.BoneDry
-//					}
-//				},
-//				{
-//					KegState.BoneDry, new[]
-//					{
-//						KegState.Full
-//					}
-//				},
+				{
+					KegState.GoingDown, new[]
+					{
+						KegState.NearlyEmpty
+					}
+				},
+				{
+					KegState.NearlyEmpty, new[]
+					{
+						KegState.Full,
+						KegState.Empty
+					}
+				},
+				{
+					KegState.Empty, new[]
+					{
+						KegState.Full
+					}
+				},
 			};
 		}
 

@@ -59,6 +59,16 @@
             Name of the beer
             </summary>
         </member>
+        <member name="P:BeerTaps.Model.Resources.BeerTap.TotalVolume">
+            <summary>
+            Total volume in mL
+            </summary>
+        </member>
+        <member name="P:BeerTaps.Model.Resources.BeerTap.CurrentVolume">
+            <summary>
+            Current volume in mL (less than or equal to TotalVolume)
+            </summary>
+        </member>
         <member name="P:BeerTaps.Model.Resources.BeerTap.KegState">
             <summary>
             State of the keg
@@ -71,7 +81,7 @@
         </member>
         <member name="T:BeerTaps.Model.Resources.Office">
             <summary>
-            A Sample Resource, used as a placeholder. To be removed after real-world API resources have been added.
+            An Office with an Id and Location, links to BeerTaps
             </summary>
         </member>
         <member name="P:BeerTaps.Model.Resources.Office.Id">
@@ -84,6 +94,26 @@
             Location string for the Office
             </summary>
         </member>
+        <member name="T:BeerTaps.Model.Resources.ReplaceKeg">
+            <summary>
+            ReplaceKeg resource, for offering choices on different beers
+            </summary>
+        </member>
+        <member name="P:BeerTaps.Model.Resources.ReplaceKeg.BeerName">
+            <summary>
+            BeerName of the beer in this keg
+            </summary>
+        </member>
+        <member name="P:BeerTaps.Model.Resources.ReplaceKeg.TotalVolume">
+            <summary>
+            TotalVolume of this keg
+            </summary>
+        </member>
+        <member name="P:BeerTaps.Model.Resources.ReplaceKeg.CurrentVolume">
+            <summary>
+            CurrentVolume on a new keg always equals TotalVolume
+            </summary>
+        </member>
         <member name="F:BeerTaps.Model.States.KegState.Full">
             <summary>
             The keg is fresh and full
@@ -92,19 +122,19 @@
         </member>
         <member name="F:BeerTaps.Model.States.KegState.GoingDown">
             <summary>
-            The keg has given a few pints
+            She's shared a few pints
             Pour, CheckKegState
             </summary>
         </member>
         <member name="F:BeerTaps.Model.States.KegState.NearlyEmpty">
             <summary>
-            The keg has given almost all it can
+            She's given almost all she can
             Pour, CheckKegState, ReplaceKeg
             </summary>
         </member>
-        <member name="F:BeerTaps.Model.States.KegState.BoneDry">
+        <member name="F:BeerTaps.Model.States.KegState.Empty">
             <summary>
-            Replace the poor bastard
+            She's done
             CheckKegState, ReplaceKeg
             </summary>
         </member>

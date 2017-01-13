@@ -23,13 +23,13 @@ namespace BeerTaps.ApiServices.Services
 //        readonly IApiUserProvider<BeerTapsApiUser> _userProvider;
 	    private readonly IBeerTapService _beerTapService;
 	    private readonly IMapper<BeerTapDto, BeerTap> _toResourceMapper;
-//	    private readonly IMapper<BeerTap, BeerTapDto> _toTransportMapper;
+	    private readonly IMapper<BeerTap, BeerTapDto> _toTransportMapper;
 
         public BeerTapApiService(IBeerTapService beerTapService, IMapperFactory mapperFactory)
         {
 	        _beerTapService = beerTapService;
 	        _toResourceMapper = mapperFactory.Create<BeerTapDto, BeerTap>();
-//	        _toTransportMapper = mapperFactory.Create<BeerTap, BeerTapDto>();
+	        _toTransportMapper = mapperFactory.Create<BeerTap, BeerTapDto>();
         }
 
 	    private static int EnsureOfficeIdIsSetInContext(IRequestContext context)
@@ -45,10 +45,7 @@ namespace BeerTaps.ApiServices.Services
         {
 	        var officeId = EnsureOfficeIdIsSetInContext(context);
 			
-			// Grab and return the BeerTap associated with the officeId and id
-	        BeerTap beerTapToReturn = _toResourceMapper.Map(_beerTapService.Get(officeId, id));
-
-	        return Task.FromResult(beerTapToReturn);
+	        return Task.FromResult(_toResourceMapper.Map(_beerTapService.Get(officeId, id)));
         }
 
         public Task<IEnumerable<BeerTap>> GetManyAsync(IRequestContext context, CancellationToken cancellation)
@@ -56,8 +53,6 @@ namespace BeerTaps.ApiServices.Services
 			var officeId = EnsureOfficeIdIsSetInContext(context);
 
 	        return Task.FromResult(_beerTapService.GetAllAtOfficeId(officeId).Select(_toResourceMapper.Map));
-
-	        //return Task.FromResult(_beerTapService.GetAll().Select(_toResourceMapper.Map));
         }
 
         public Task<ResourceCreationResult<BeerTap, int>> CreateAsync(BeerTap resource, IRequestContext context, CancellationToken cancellation)
@@ -65,9 +60,14 @@ namespace BeerTaps.ApiServices.Services
             throw new NotImplementedException();
         }
 
+		// Remember to enter the BeerTap parameters in question (OfficeId and Id in particular) into the "Body" tab in Postman
         public Task<BeerTap> UpdateAsync(BeerTap resource, IRequestContext context, CancellationToken cancellation)
         {
-            throw new NotImplementedException();
+			EnsureOfficeIdIsSetInContext(context);
+
+	        _beerTapService.Pour(resource.OfficeId, resource.Id);
+
+	        return Task.FromResult(_toResourceMapper.Map(_beerTapService.Get(resource.OfficeId, resource.Id)));
         }
 
         public Task DeleteAsync(ResourceOrIdentifier<BeerTap, int> input, IRequestContext context, CancellationToken cancellation)

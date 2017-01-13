@@ -42,9 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBeerTapsService.cs" />
+    <Compile Include="ICloneable.cs" />
     <Compile Include="Models\BeerTapDto.cs" />
     <Compile Include="Models\OfficeDto.cs" />
+    <Compile Include="Models\ReplaceKegDto.cs" />
     <Compile Include="Services\BeerTapService.cs" />
+    <Compile Include="Services\ReplaceKegService.cs" />
     <Compile Include="Services\OfficeService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

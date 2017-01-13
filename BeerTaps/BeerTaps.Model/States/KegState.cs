@@ -8,19 +8,19 @@
         /// </summary>
         Full,
         /// <summary>
-        /// The keg has given a few pints
+        /// She's shared a few pints
         /// Pour, CheckKegState
         /// </summary>
         GoingDown,
         /// <summary>
-        /// The keg has given almost all it can
+        /// She's given almost all she can
         /// Pour, CheckKegState, ReplaceKeg
         /// </summary>
         NearlyEmpty,
         /// <summary>
-        /// Replace the poor bastard
+        /// She's done
         /// CheckKegState, ReplaceKeg
         /// </summary>
-        BoneDry
+        Empty
     }
 }

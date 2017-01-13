@@ -36,7 +36,7 @@ namespace BeerTaps.WebApi.Hypermedia
         ///     Full		- Pour, CheckKegStatus;
         ///     GoingDown	- Pour, CheckKegStatus;
         ///     NearlyEmpty - Pour, CheckKegStatus, ReplaceKeg;
-        ///     BoneDry		- CheckKegStatus, ReplaceKeg;
+        ///     Empty		- CheckKegStatus, ReplaceKeg;
         /// </returns>
         protected override IEnumerable<IResourceStateSpec<BeerTap, KegState, int>> GetStateSpecs()
         {
@@ -45,14 +45,14 @@ namespace BeerTaps.WebApi.Hypermedia
             {
                 Links =
                 {
-                    CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTap, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id), // Not terribly important...
+//                    CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTap, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id), // Not terribly important...
 					CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.Pour, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id),
-//					CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.CheckKegStatus, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id)
+					CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.ReplaceKeg, ReplaceKegSpec.UriReplaceKeg.Many, c => c.Parameters.OfficeId, c => c.Resource.Id) // Remove once state changes are implemented
                 },
                 Operations = new StateSpecOperationsSource<BeerTap, int>()
                 {
-                    Get = ServiceOperations.Get,		// CheckKegStatus
-                    Post = ServiceOperations.Update		// Pour
+                    Get = ServiceOperations.Get,
+                    Post = ServiceOperations.Update
                 }
             };
            // KegState <= GoingDown
@@ -61,12 +61,12 @@ namespace BeerTaps.WebApi.Hypermedia
                 Links =
                 {
                     CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.Pour, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id),
-//                    CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.CheckKegStatus, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id)
+                    CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.ReplaceKeg, ReplaceKegSpec.UriReplaceKeg.Many, c => c.Parameters.OfficeId, c => c.Resource.Id) // Remove once state changes are implemented
                 },
                 Operations =
                 {
-                    Get = ServiceOperations.Get,		// CheckKegStatus
-                    Post = ServiceOperations.Update		// Pour
+                    Get = ServiceOperations.Get,
+                    Post = ServiceOperations.Update
                 }
             };
             // KegState <= NearlyEmpty
@@ -75,28 +75,25 @@ namespace BeerTaps.WebApi.Hypermedia
                 Links =
                 {
                     CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.Pour, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id),
-//                    CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.CheckKegStatus, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id),
-//                    CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.ReplaceKeg, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id)
+                    CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.ReplaceKeg, ReplaceKegSpec.UriReplaceKeg.Many, c => c.Parameters.OfficeId, c => c.Resource.Id)
                 },
                 Operations =
                 {
-                    Get = ServiceOperations.Get,		// CheckKegStatus
-                    Post = ServiceOperations.Update		// Pour or ReplaceKeg
+                    Get = ServiceOperations.Get,
+                    Post = ServiceOperations.Update
                 }
             };
-            // KegState <= BoneDry
-            yield return new ResourceStateSpec<BeerTap, KegState, int>(KegState.BoneDry)
+            // KegState <= Empty
+            yield return new ResourceStateSpec<BeerTap, KegState, int>(KegState.Empty)
             {
                 Links =
                 {
-					CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTap, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id), // Not terribly important...
-//                    CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.CheckKegStatus, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id),
-//                    CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.ReplaceKeg, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id)
+                    CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.ReplaceKeg, ReplaceKegSpec.UriReplaceKeg.Many, c => c.Parameters.OfficeId, c => c.Resource.Id)
                 },
                 Operations =
                 {
-                    Get = ServiceOperations.Get,		// CheckKegStatus
-                    Post = ServiceOperations.Update,	// ReplaceKeg
+                    Get = ServiceOperations.Get,
+                    Post = ServiceOperations.Update,
                 }
             };
         }

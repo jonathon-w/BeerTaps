@@ -21,11 +21,11 @@ namespace BeerTaps.Model.Resources
 		/// <summary>
 		/// Total volume in mL
 		/// </summary>
-//		public int TotalVolume { get; set; }
+		public int TotalVolume { get; set; }
 		/// <summary>
 		/// Current volume in mL (less than or equal to TotalVolume)
 		/// </summary>
-//		public int CurrentVolume { get; set; }
+		public int CurrentVolume { get; set; }
         /// <summary>
         /// State of the keg
         /// </summary>

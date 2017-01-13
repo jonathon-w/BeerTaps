@@ -13,6 +13,7 @@ namespace BeerTaps.Domain.Services
 		void Delete(int officeId, int id);
 		IEnumerable<BeerTapDto> GetAll();
 		IEnumerable<BeerTapDto> GetAllAtOfficeId(int officeId);
+		void Pour(int officeId, int id);
 		BeerTapDto Update(BeerTapDto beerTap);
 	}
 
@@ -32,18 +33,18 @@ namespace BeerTaps.Domain.Services
 			// Create a list of unique BeerTaps with associated OfficeIds
 			IList<BeerTapDto> beerTaps = new List<BeerTapDto>()
 			{
-				new BeerTapDto() { OfficeId = 1, Id = 1, BeerName = "Devil's Elbow IPA" },
-				new BeerTapDto() { OfficeId = 1, Id = 2, BeerName = "Ambleside Amber Ale" },
-				new BeerTapDto() { OfficeId = 1, Id = 3, BeerName = "Main Street Pilsner" },
-				new BeerTapDto() { OfficeId = 2, Id = 1, BeerName = "Rebellion Golden Ale" },
-				new BeerTapDto() { OfficeId = 2, Id = 2, BeerName = "Steamworks Heroica Red Ale" },
-				new BeerTapDto() { OfficeId = 3, Id = 1, BeerName = "33 Acres of Darkness" },
-				new BeerTapDto() { OfficeId = 3, Id = 2, BeerName = "Affligem Blonde" },
-				new BeerTapDto() { OfficeId = 4, Id = 1, BeerName = "Pirate Life Brewing Double India Pale Ale" },
-				new BeerTapDto() { OfficeId = 5, Id = 1, BeerName = "Fat Pauly's Desert Rose" },
-				new BeerTapDto() { OfficeId = 5, Id = 2, BeerName = "Xavierbier's Message in a Bottle Black IPA" },
-				new BeerTapDto() { OfficeId = 6, Id = 1, BeerName = "Nectarous Dry-Hopper Sour" },
-				new BeerTapDto() { OfficeId = 6, Id = 2, BeerName = "Stonecutter Scotch Ale" }
+				new BeerTapDto() { OfficeId = 1, Id = 1, BeerName = "Devil's Elbow IPA", TotalVolume = 5000, CurrentVolume = 5000},
+				new BeerTapDto() { OfficeId = 1, Id = 2, BeerName = "Ambleside Amber Ale", TotalVolume = 5000, CurrentVolume = 5000 },
+				new BeerTapDto() { OfficeId = 1, Id = 3, BeerName = "Main Street Pilsner", TotalVolume = 5000, CurrentVolume = 5000 },
+				new BeerTapDto() { OfficeId = 2, Id = 1, BeerName = "Rebellion Golden Ale", TotalVolume = 5000, CurrentVolume = 5000 },
+				new BeerTapDto() { OfficeId = 2, Id = 2, BeerName = "Steamworks Heroica Red Ale", TotalVolume = 5000, CurrentVolume = 5000 },
+				new BeerTapDto() { OfficeId = 3, Id = 1, BeerName = "33 Acres of Darkness", TotalVolume = 5000, CurrentVolume = 5000 },
+				new BeerTapDto() { OfficeId = 3, Id = 2, BeerName = "Affligem Blonde", TotalVolume = 5000, CurrentVolume = 5000 },
+				new BeerTapDto() { OfficeId = 4, Id = 1, BeerName = "Pirate Life Brewing Double India Pale Ale", TotalVolume = 5000, CurrentVolume = 5000 },
+				new BeerTapDto() { OfficeId = 5, Id = 1, BeerName = "Fat Pauly's Desert Rose", TotalVolume = 5000, CurrentVolume = 5000 },
+				new BeerTapDto() { OfficeId = 5, Id = 2, BeerName = "Xavierbier's Message in a Bottle Black IPA", TotalVolume = 5000, CurrentVolume = 5000 },
+				new BeerTapDto() { OfficeId = 6, Id = 1, BeerName = "Nectarous Dry-Hopper Sour", TotalVolume = 5000, CurrentVolume = 5000 },
+				new BeerTapDto() { OfficeId = 6, Id = 2, BeerName = "Stonecutter Scotch Ale", TotalVolume = 5000, CurrentVolume = 5000 }
 			};
 
 			// Add each BeerTap to the Dictionary
@@ -76,8 +77,22 @@ namespace BeerTaps.Domain.Services
 
 		public IEnumerable<BeerTapDto> GetAllAtOfficeId(int officeId)
 		{
-			//return _beerTaps.Where(x => x.Key.Item1.Equals(officeId)).Values;
 			return _beerTaps.Values.Where(x => x.OfficeId.Equals(officeId));
+		}
+
+		public void Pour(int officeId, int id)
+		{
+			// Get the BeerTap being pointed at and create a copy to update
+			var beerTap = Get(officeId, id);
+			var updatedBeerTap = beerTap.Clone();
+
+			// Subtract a pint (500ml) from the keg
+			updatedBeerTap.CurrentVolume = (updatedBeerTap.CurrentVolume - 500) >= 0
+				? updatedBeerTap.CurrentVolume -= 500
+				: updatedBeerTap.CurrentVolume = 0;
+
+			// Place the updated BeerTap back into the Dictionary
+			Update(updatedBeerTap);
 		}
 
 		public BeerTapDto Update(BeerTapDto beerTap)

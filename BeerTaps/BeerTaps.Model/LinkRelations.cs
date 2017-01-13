@@ -29,10 +29,6 @@
             /// Action link to describe pour a pint
             /// </summary>
             public const string Pour = "iq:Pour";
-            /// <summary>
-            /// Action link to describe checking the keg's state
-            /// </summary>
-            public const string CheckKegStatus = "iq:CheckKegStatus";
         }
 
     }

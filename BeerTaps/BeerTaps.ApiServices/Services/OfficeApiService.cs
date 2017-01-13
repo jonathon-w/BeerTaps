@@ -35,32 +35,11 @@ namespace BeerTaps.ApiServices.Services
 	        Office officeToReturn =_toResourceMapper.Map(_officeService.Get(id));
 
 	        return Task.FromResult(officeToReturn);
-//	        Office officeToReturn;
-//	        if (id == 1)
-//	        {
-//		        officeToReturn = new Office()
-//		        {
-//			        Id = id,
-//			        Location = "Vancouver, British Columbia"
-//		        };
-//		        return Task.FromResult(officeToReturn);
-//	        }
-//	        else
-//	        {
-//				officeToReturn = new Office()
-//				{
-//					Id = id,
-//					Location = "Regina, Saskatchewan"
-//				};
-//				return Task.FromResult(officeToReturn);
-//			}
-	        
         }
 
         public Task<IEnumerable<Office>> GetManyAsync(IRequestContext context, CancellationToken cancellation)
         {
-            throw new NotImplementedException();
-//	        return Task.FromResult(_officeService.GetAll().Select(_toResourceMapper.Map));
+	        return Task.FromResult(_officeService.GetAll().Select(_toResourceMapper.Map));
         }
 
         public Task<ResourceCreationResult<Office, int>> CreateAsync(Office resource, IRequestContext context, CancellationToken cancellation)

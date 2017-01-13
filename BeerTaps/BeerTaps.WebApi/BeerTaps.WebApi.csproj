@@ -292,6 +292,7 @@
     <Compile Include="Hypermedia\BeerTapSpec.cs" />
     <Compile Include="Hypermedia\KegStateProvider.cs" />
     <Compile Include="Hypermedia\OfficeSpec.cs" />
+    <Compile Include="Hypermedia\ReplaceKegSpec.cs" />
     <Compile Include="Infrastructure\BootStrapper.cs" />
     <Compile Include="Infrastructure\DefaultApiContainer.cs" />
     <Compile Include="Infrastructure\Installers\BeerTapsMapperInstaller.cs" />

@@ -34,7 +34,7 @@ namespace BeerTaps.WebApi.Hypermedia
                     {
                         Links =
                         {
-                            CreateLinkTemplate(LinkRelations.BeerTap, BeerTapSpec.UriBeerTapAtOffice.Many, r => r.Id),
+                            CreateLinkTemplate(LinkRelations.BeerTaps.PluralBeerTaps, BeerTapSpec.UriBeerTapAtOffice.Many, r => r.Id),
                         },
 
                         Operations =

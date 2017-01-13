@@ -176,9 +176,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BeerTapLinkParameter.cs" />
+    <Compile Include="BeerTapMapper.cs" />
     <Compile Include="IDomainServiceResolver.cs" />
     <Compile Include="Interfaces\IBeerTapApiService.cs" />
     <Compile Include="Interfaces\IOfficeApiService.cs" />
+    <Compile Include="Interfaces\IReplaceKegApiServices.cs" />
     <Compile Include="LinksParametersSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\ApiClient.cs" />
@@ -186,6 +188,8 @@
     <Compile Include="Security\BeerTapsApiUser.cs" />
     <Compile Include="Services\BeerTapApiService.cs" />
     <Compile Include="Services\OfficeApiService.cs" />
+    <Compile Include="ReplaceKegLinkParameter.cs" />
+    <Compile Include="Services\ReplaceKegApiServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BeerTaps.Domain\BeerTaps.Domain.csproj">

@@ -64,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\BeerTap.cs" />
     <Compile Include="Resources\Office.cs" />
+    <Compile Include="Resources\ReplaceKeg.cs" />
     <Compile Include="States\KegState.cs" />
   </ItemGroup>
   <ItemGroup>
