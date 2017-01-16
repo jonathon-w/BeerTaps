@@ -35,6 +35,7 @@ namespace BeerTaps.WebApi.Hypermedia
 				{
 					KegState.GoingDown, new[]
 					{
+						KegState.Full, // Should not be necessary, but an error occurs about an invalid state transition from GoingDown to Full
 						KegState.NearlyEmpty
 					}
 				},

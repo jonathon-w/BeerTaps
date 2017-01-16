@@ -6,9 +6,7 @@ namespace BeerTaps.ApiServices.Interfaces
     public interface IBeerTapApiService :
         IGetAResourceAsync<BeerTap, int>,
         IGetManyOfAResourceAsync<BeerTap, int>,
-        ICreateAResourceAsync<BeerTap, int>,
-        IUpdateAResourceAsync<BeerTap, int>,
-        IDeleteResourceAsync<BeerTap, int>
+        IUpdateAResourceAsync<BeerTap, int>
     {
     }
 }

@@ -1,5 +1,8 @@
 ﻿namespace BeerTaps.Model.States
 {
+	/// <summary>
+	/// Possible states for a BeerTap
+	/// </summary>
     public enum KegState
     {
         /// <summary>

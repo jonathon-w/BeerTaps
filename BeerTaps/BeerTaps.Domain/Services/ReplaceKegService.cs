@@ -12,15 +12,18 @@ namespace BeerTaps.Domain.Services
 		void Delete(int kegId);
 		IEnumerable<ReplaceKegDto> GetAll();
 		ReplaceKegDto Update(ReplaceKegDto beerTap);
+		ReplaceKegDto ReplaceKeg(int officeId, int beerTapId, int kegId);
 	}
 
 	public class ReplaceKegService : IReplaceKegService
 	{
 		readonly IDictionary<int, ReplaceKegDto> _availableKegs;
+		private readonly IBeerTapService _beerTapService;
 
-		public ReplaceKegService()
+		public ReplaceKegService(IBeerTapService beerTapService)
 		{
 			_availableKegs = new Dictionary<int, ReplaceKegDto>();
+			_beerTapService = beerTapService;
 
 			Initialize();
 		}
@@ -68,6 +71,22 @@ namespace BeerTaps.Domain.Services
 		public IEnumerable<ReplaceKegDto> GetAll()
 		{
 			return _availableKegs.Values;
+		}
+
+		public ReplaceKegDto ReplaceKeg(int officeId, int beerTapId, int kegId)
+		{
+			ReplaceKegDto newKeg = Get(kegId);
+			BeerTapDto newBeerTap = new BeerTapDto()
+			{
+				OfficeId = officeId,
+				Id = beerTapId,
+				BeerName = newKeg.BeerName,
+				TotalVolume = newKeg.TotalVolume,
+				CurrentVolume = newKeg.CurrentVolume
+			};
+			_beerTapService.Replace(newBeerTap);
+
+			return newKeg;
 		}
 
 		public ReplaceKegDto Update(ReplaceKegDto keg)

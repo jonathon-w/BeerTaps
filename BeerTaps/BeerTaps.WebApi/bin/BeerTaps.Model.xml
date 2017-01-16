@@ -4,6 +4,11 @@
         <name>BeerTaps.Model</name>
     </assembly>
     <members>
+        <member name="T:BeerTaps.Model.Interfaces.IStatefulBeerTap">
+            <summary>
+            Interface allowing state getter
+            </summary>
+        </member>
         <member name="P:BeerTaps.Model.Interfaces.IStatefulBeerTap.KegState">
             <summary>
             Interface allowing state getter
@@ -24,6 +29,11 @@
             link relation to describe the BeerTap resource
             </summary>
         </member>
+        <member name="T:BeerTaps.Model.LinkRelations.BeerTaps">
+            <summary>
+            Link relations for BeerTaps
+            </summary>
+        </member>
         <member name="F:BeerTaps.Model.LinkRelations.BeerTaps.PluralBeerTaps">
             <summary>
             Link to describe multiple beer taps
@@ -37,11 +47,6 @@
         <member name="F:BeerTaps.Model.LinkRelations.BeerTaps.Pour">
             <summary>
             Action link to describe pour a pint
-            </summary>
-        </member>
-        <member name="F:BeerTaps.Model.LinkRelations.BeerTaps.CheckKegStatus">
-            <summary>
-            Action link to describe checking the keg's state
             </summary>
         </member>
         <member name="T:BeerTaps.Model.Resources.BeerTap">
@@ -112,6 +117,11 @@
         <member name="P:BeerTaps.Model.Resources.ReplaceKeg.CurrentVolume">
             <summary>
             CurrentVolume on a new keg always equals TotalVolume
+            </summary>
+        </member>
+        <member name="T:BeerTaps.Model.States.KegState">
+            <summary>
+            Possible states for a BeerTap
             </summary>
         </member>
         <member name="F:BeerTaps.Model.States.KegState.Full">

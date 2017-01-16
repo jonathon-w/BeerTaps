@@ -8,10 +8,6 @@ using BeerTaps.ApiServices.Interfaces;
 using BeerTaps.Domain.Models;
 using BeerTaps.Domain.Services;
 using BeerTaps.Model.Resources;
-using BeerTaps.ApiServices.Interfaces;
-using BeerTaps.Domain.Models;
-using BeerTaps.Domain.Services;
-using BeerTaps.Model.Resources;
 using IQ.Platform.Framework.Common;
 using IQ.Platform.Framework.Common.Mapping;
 using IQ.Platform.Framework.WebApi;
@@ -32,7 +28,7 @@ namespace BeerTaps.ApiServices.Services
 			_toTransportMapper = mapperFactory.Create<ReplaceKeg, ReplaceKegDto>();
 		}
 
-		private static int EnsureOfficeIdIsSetInContext(IRequestContext context)
+		private static int EnsureIdsAreSetInContext(IRequestContext context)
 		{
 			var officeId = context.UriParameters.GetByName<int>("OfficeId").EnsureValue();
 			var beerTapId = context.UriParameters.GetByName<int>("BeerTapId").EnsureValue();
@@ -42,34 +38,33 @@ namespace BeerTaps.ApiServices.Services
 			return officeId;
 		}
 
-		public Task<ReplaceKeg> GetAsync(int id, IRequestContext context, CancellationToken cancellation)
+		private static int GetOfficeId(IRequestContext context)
 		{
-			throw new NotImplementedException();
+			return context.UriParameters.GetByName<int>("OfficeId").EnsureValue();
+		}
+
+		private static int GetBeerTapId(IRequestContext context)
+		{
+			return context.UriParameters.GetByName<int>("BeerTapId").EnsureValue();
 		}
 
 		public Task<IEnumerable<ReplaceKeg>> GetManyAsync(IRequestContext context, CancellationToken cancellation)
 		{
-			EnsureOfficeIdIsSetInContext(context);
+			EnsureIdsAreSetInContext(context);
 
 			return Task.FromResult(_replaceKegService.GetAll().Select(_toResourceMapper.Map));
-		}
-
-		public Task<ResourceCreationResult<ReplaceKeg, int>> CreateAsync(ReplaceKeg resource, IRequestContext context, CancellationToken cancellation)
-		{
-			throw new NotImplementedException();
 		}
 
 		// Remember to enter the ReplaceKeg parameters in question (OfficeId and Id in particular) into the "Body" tab in Postman
 		public Task<ReplaceKeg> UpdateAsync(ReplaceKeg resource, IRequestContext context, CancellationToken cancellation)
 		{
-			EnsureOfficeIdIsSetInContext(context);
+			EnsureIdsAreSetInContext(context);
+			var officeId = GetOfficeId(context);
+			var beerTapId = GetBeerTapId(context);
 
-			throw new NotImplementedException();
-		}
+			_replaceKegService.ReplaceKeg(officeId, beerTapId, resource.Id);
 
-		public Task DeleteAsync(ResourceOrIdentifier<ReplaceKeg, int> input, IRequestContext context, CancellationToken cancellation)
-		{
-			throw new NotImplementedException();
+			return Task.FromResult(_toResourceMapper.Map(_replaceKegService.Get(resource.Id)));
 		}
 	}
 }

@@ -24,5 +24,25 @@ namespace BeerTaps.WebApi.Hypermedia
 				CreateLinkTemplate<ReplaceKegLinkParameter>(CommonLinkRelations.Self, UriReplaceKeg, c => c.Parameters.OfficeId,
 					c => c.Parameters.BeerTapId);
 		}
+
+		public override IResourceStateSpec<ReplaceKeg, NullState, int> StateSpec
+		{
+			get
+			{
+				return new SingleStateSpec<ReplaceKeg, int>()
+				{
+					Operations =
+					{
+						Get = ServiceOperations.Get,
+						Post = ServiceOperations.Update
+					},
+					Links =
+					{
+						CreateLinkTemplate<ReplaceKegLinkParameter>(LinkRelations.BeerTaps.ReplaceKeg, UriReplaceKeg, c => c.Parameters.OfficeId, 
+						c => c.Parameters.BeerTapId)
+					}
+				};
+			} 
+		}
 	}
 }

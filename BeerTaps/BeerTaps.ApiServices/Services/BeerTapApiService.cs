@@ -25,11 +25,14 @@ namespace BeerTaps.ApiServices.Services
 	    private readonly IMapper<BeerTapDto, BeerTap> _toResourceMapper;
 	    private readonly IMapper<BeerTap, BeerTapDto> _toTransportMapper;
 
-        public BeerTapApiService(IBeerTapService beerTapService, IMapperFactory mapperFactory)
+        public BeerTapApiService(IBeerTapService beerTapService,
+			IMapper<BeerTapDto, BeerTap> toResourceMapper,
+			IMapper<BeerTap, BeerTapDto> toTransportMapper
+			)
         {
 	        _beerTapService = beerTapService;
-	        _toResourceMapper = mapperFactory.Create<BeerTapDto, BeerTap>();
-	        _toTransportMapper = mapperFactory.Create<BeerTap, BeerTapDto>();
+	        _toResourceMapper = toResourceMapper;
+	        _toTransportMapper = toTransportMapper;
         }
 
 	    private static int EnsureOfficeIdIsSetInContext(IRequestContext context)
@@ -55,11 +58,6 @@ namespace BeerTaps.ApiServices.Services
 	        return Task.FromResult(_beerTapService.GetAllAtOfficeId(officeId).Select(_toResourceMapper.Map));
         }
 
-        public Task<ResourceCreationResult<BeerTap, int>> CreateAsync(BeerTap resource, IRequestContext context, CancellationToken cancellation)
-        {
-            throw new NotImplementedException();
-        }
-
 		// Remember to enter the BeerTap parameters in question (OfficeId and Id in particular) into the "Body" tab in Postman
         public Task<BeerTap> UpdateAsync(BeerTap resource, IRequestContext context, CancellationToken cancellation)
         {
@@ -68,11 +66,6 @@ namespace BeerTaps.ApiServices.Services
 	        _beerTapService.Pour(resource.OfficeId, resource.Id);
 
 	        return Task.FromResult(_toResourceMapper.Map(_beerTapService.Get(resource.OfficeId, resource.Id)));
-        }
-
-        public Task DeleteAsync(ResourceOrIdentifier<BeerTap, int> input, IRequestContext context, CancellationToken cancellation)
-        {
-            throw new NotImplementedException();
         }
     }
 }

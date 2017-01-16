@@ -15,43 +15,31 @@ namespace BeerTaps.ApiServices
 		/// <returns></returns>
 		public BeerTap Map(BeerTapDto transport)
 		{
-			if (transport != null)
+			if (transport == null)
 			{
-				var resource = new BeerTap()
-				{
-					Id = transport.Id,
-					BeerName = transport.BeerName,
-					OfficeId = transport.OfficeId
-				};
-				return resource;
+				return null;
 			}
-			return null;
+			
+			var resource = new BeerTap()
+			{
+				Id = transport.Id,
+				BeerName = transport.BeerName,
+				OfficeId = transport.OfficeId,
+				KegState = MapState(transport),
+				TotalVolume = transport.TotalVolume,
+				CurrentVolume = transport.CurrentVolume
+			};
+			return resource;
 		}
 
-//		static KegState MapState(BeerTapDto transport)
-//		{
-//			if (transport.IsFull)
-//				return KegState.Full;
-//			if (transport.IsGoingDown)
-//				return KegState.GoingDown;
-//			if (transport.IsNearlyEmpty)
-//				return KegState.NearlyEmpty;
-//			if (transport.IsEmpty)
-//				return KegState.Empty;
-//
-//			return KegState.Empty;
-//		}
-
-		static KegState MapState(BeerTap resource)
+		private static KegState MapState(BeerTapDto resource)
 		{
-			if ((resource.CurrentVolume/resource.TotalVolume*100) == 100)
+			if (resource.CurrentVolume == resource.TotalVolume) // Full - 100%
 				return KegState.Full;
-			if ((resource.CurrentVolume / resource.TotalVolume * 100) < 100 && (resource.CurrentVolume / resource.TotalVolume * 100) >= 30)
+			if (resource.CurrentVolume < resource.TotalVolume && resource.CurrentVolume > (resource.TotalVolume * 0.30)) // GoingDown - 99% -> 31%
 				return KegState.GoingDown;
-			if ((resource.CurrentVolume / resource.TotalVolume * 100) < 30 && (resource.CurrentVolume / resource.TotalVolume * 100) > 0)
+			if (resource.CurrentVolume <= (resource.TotalVolume * 0.30) && resource.CurrentVolume > 0) // NearlyEmpty - 30% -> 1%
 				return KegState.NearlyEmpty;
-			if ((resource.CurrentVolume / resource.TotalVolume * 100) <= 0)
-				return KegState.Empty;
 
 			return KegState.Empty;
 		}
@@ -63,21 +51,24 @@ namespace BeerTaps.ApiServices
 		/// <returns></returns>
 		public BeerTapDto Map(BeerTap resource)
 		{
-			if (resource != null)
+			if (resource == null)
 			{
-				var transport = new BeerTapDto()
-				{
-					Id = resource.Id,
-					BeerName = resource.BeerName,
-					OfficeId = resource.OfficeId,
-					IsFull = resource.KegState == KegState.Full,
-					IsGoingDown = resource.KegState == KegState.GoingDown,
-					IsNearlyEmpty = resource.KegState == KegState.NearlyEmpty,
-					IsEmpty = resource.KegState == KegState.Empty
-				};
-				return transport;
+				return null;
 			}
-			return null;
+			
+			var transport = new BeerTapDto()
+			{
+				Id = resource.Id,
+				BeerName = resource.BeerName,
+				OfficeId = resource.OfficeId,
+				TotalVolume = resource.TotalVolume,
+				CurrentVolume = resource.CurrentVolume,
+				IsFull = resource.KegState == KegState.Full,
+				IsGoingDown = resource.KegState == KegState.GoingDown,
+				IsNearlyEmpty = resource.KegState == KegState.NearlyEmpty,
+				IsEmpty = resource.KegState == KegState.Empty
+			};
+			return transport;
 		}
 	}
 }

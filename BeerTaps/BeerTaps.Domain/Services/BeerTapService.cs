@@ -13,6 +13,7 @@ namespace BeerTaps.Domain.Services
 		void Delete(int officeId, int id);
 		IEnumerable<BeerTapDto> GetAll();
 		IEnumerable<BeerTapDto> GetAllAtOfficeId(int officeId);
+		void Replace(BeerTapDto newBeerTap);
 		void Pour(int officeId, int id);
 		BeerTapDto Update(BeerTapDto beerTap);
 	}
@@ -23,9 +24,11 @@ namespace BeerTaps.Domain.Services
 
 		public BeerTapService()
 		{
-			_beerTaps = new Dictionary<Tuple<int, int>, BeerTapDto>();
-
-			Initialize();
+			if (_beerTaps == null)
+			{
+				_beerTaps = new Dictionary<Tuple<int, int>, BeerTapDto>();
+				Initialize();
+			}
 		}
 
 		private void Initialize()
@@ -33,18 +36,18 @@ namespace BeerTaps.Domain.Services
 			// Create a list of unique BeerTaps with associated OfficeIds
 			IList<BeerTapDto> beerTaps = new List<BeerTapDto>()
 			{
-				new BeerTapDto() { OfficeId = 1, Id = 1, BeerName = "Devil's Elbow IPA", TotalVolume = 5000, CurrentVolume = 5000},
-				new BeerTapDto() { OfficeId = 1, Id = 2, BeerName = "Ambleside Amber Ale", TotalVolume = 5000, CurrentVolume = 5000 },
-				new BeerTapDto() { OfficeId = 1, Id = 3, BeerName = "Main Street Pilsner", TotalVolume = 5000, CurrentVolume = 5000 },
-				new BeerTapDto() { OfficeId = 2, Id = 1, BeerName = "Rebellion Golden Ale", TotalVolume = 5000, CurrentVolume = 5000 },
-				new BeerTapDto() { OfficeId = 2, Id = 2, BeerName = "Steamworks Heroica Red Ale", TotalVolume = 5000, CurrentVolume = 5000 },
-				new BeerTapDto() { OfficeId = 3, Id = 1, BeerName = "33 Acres of Darkness", TotalVolume = 5000, CurrentVolume = 5000 },
-				new BeerTapDto() { OfficeId = 3, Id = 2, BeerName = "Affligem Blonde", TotalVolume = 5000, CurrentVolume = 5000 },
-				new BeerTapDto() { OfficeId = 4, Id = 1, BeerName = "Pirate Life Brewing Double India Pale Ale", TotalVolume = 5000, CurrentVolume = 5000 },
-				new BeerTapDto() { OfficeId = 5, Id = 1, BeerName = "Fat Pauly's Desert Rose", TotalVolume = 5000, CurrentVolume = 5000 },
-				new BeerTapDto() { OfficeId = 5, Id = 2, BeerName = "Xavierbier's Message in a Bottle Black IPA", TotalVolume = 5000, CurrentVolume = 5000 },
-				new BeerTapDto() { OfficeId = 6, Id = 1, BeerName = "Nectarous Dry-Hopper Sour", TotalVolume = 5000, CurrentVolume = 5000 },
-				new BeerTapDto() { OfficeId = 6, Id = 2, BeerName = "Stonecutter Scotch Ale", TotalVolume = 5000, CurrentVolume = 5000 }
+				new BeerTapDto() {OfficeId = 1, Id = 1, BeerName = "Devil's Elbow IPA", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true, IsGoingDown = false, IsNearlyEmpty = false, IsEmpty = false},
+				new BeerTapDto() {OfficeId = 1, Id = 2, BeerName = "Ambleside Amber Ale", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true},
+				new BeerTapDto() {OfficeId = 1, Id = 3, BeerName = "Main Street Pilsner", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true},
+				new BeerTapDto() {OfficeId = 2, Id = 1, BeerName = "Rebellion Golden Ale", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true},
+				new BeerTapDto() {OfficeId = 2, Id = 2, BeerName = "Steamworks Heroica Red Ale", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true},
+				new BeerTapDto() {OfficeId = 3, Id = 1, BeerName = "33 Acres of Darkness", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true},
+				new BeerTapDto() {OfficeId = 3, Id = 2, BeerName = "Affligem Blonde", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true},
+				new BeerTapDto() {OfficeId = 4, Id = 1, BeerName = "Pirate Life Brewing Double India Pale Ale", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true},
+				new BeerTapDto() {OfficeId = 5, Id = 1, BeerName = "Fat Pauly's Desert Rose", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true},
+				new BeerTapDto() {OfficeId = 5, Id = 2, BeerName = "Xavierbier's Message in a Bottle Black IPA", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true},
+				new BeerTapDto() {OfficeId = 6, Id = 1, BeerName = "Nectarous Dry-Hopper Sour", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true},
+				new BeerTapDto() {OfficeId = 6, Id = 2, BeerName = "Stonecutter Scotch Ale", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true}
 			};
 
 			// Add each BeerTap to the Dictionary
@@ -59,7 +62,7 @@ namespace BeerTaps.Domain.Services
 			_beerTaps.Add(Tuple.Create(beerTap.OfficeId, beerTap.Id), beerTap);
 			return beerTap;
 		}
-		
+
 		public BeerTapDto Get(int officeId, int id)
 		{
 			return _beerTaps.FirstOrDefault(x => x.Key.Equals(Tuple.Create(officeId, id))).Value;
@@ -78,6 +81,12 @@ namespace BeerTaps.Domain.Services
 		public IEnumerable<BeerTapDto> GetAllAtOfficeId(int officeId)
 		{
 			return _beerTaps.Values.Where(x => x.OfficeId.Equals(officeId));
+		}
+
+		public void Replace(BeerTapDto newBeerTap)
+		{
+			Delete(newBeerTap.OfficeId, newBeerTap.Id);
+			Add(newBeerTap);
 		}
 
 		public void Pour(int officeId, int id)

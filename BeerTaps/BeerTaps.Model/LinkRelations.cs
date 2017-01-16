@@ -15,6 +15,9 @@
         /// </summary>
         public const string BeerTap = "iq:BeerTap";
 
+		/// <summary>
+		/// Link relations for BeerTaps
+		/// </summary>
         public static class BeerTaps
         {
 			/// <summary>

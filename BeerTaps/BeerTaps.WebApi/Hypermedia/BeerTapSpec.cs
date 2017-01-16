@@ -45,9 +45,7 @@ namespace BeerTaps.WebApi.Hypermedia
             {
                 Links =
                 {
-//                    CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTap, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id), // Not terribly important...
 					CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.Pour, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id),
-					CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.ReplaceKeg, ReplaceKegSpec.UriReplaceKeg.Many, c => c.Parameters.OfficeId, c => c.Resource.Id) // Remove once state changes are implemented
                 },
                 Operations = new StateSpecOperationsSource<BeerTap, int>()
                 {
@@ -61,7 +59,6 @@ namespace BeerTaps.WebApi.Hypermedia
                 Links =
                 {
                     CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.Pour, UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Resource.Id),
-                    CreateLinkTemplate<BeerTapLinkParameter>(LinkRelations.BeerTaps.ReplaceKeg, ReplaceKegSpec.UriReplaceKeg.Many, c => c.Parameters.OfficeId, c => c.Resource.Id) // Remove once state changes are implemented
                 },
                 Operations =
                 {
