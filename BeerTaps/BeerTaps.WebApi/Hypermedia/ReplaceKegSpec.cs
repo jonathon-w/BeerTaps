@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BeerTaps.ApiServices;
+using BeerTaps.ApiServices.LinkParameters;
 using BeerTaps.Model;
 using BeerTaps.Model.Resources;
 using BeerTaps.Model.States;

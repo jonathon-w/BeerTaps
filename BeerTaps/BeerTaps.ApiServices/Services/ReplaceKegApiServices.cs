@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using BeerTaps.ApiServices;
 using BeerTaps.ApiServices.Interfaces;
+using BeerTaps.ApiServices.LinkParameters;
 using BeerTaps.Domain.Models;
 using BeerTaps.Domain.Services;
 using BeerTaps.Model.Resources;

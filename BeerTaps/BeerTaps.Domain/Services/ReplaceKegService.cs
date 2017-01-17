@@ -75,24 +75,40 @@ namespace BeerTaps.Domain.Services
 
 		public ReplaceKegDto ReplaceKeg(int officeId, int beerTapId, int kegId)
 		{
-			ReplaceKegDto newKeg = Get(kegId);
-			BeerTapDto newBeerTap = new BeerTapDto()
+			var beerTap = _beerTapService.Get(officeId, beerTapId);
+			if (!(beerTap.IsNearlyEmpty || beerTap.IsEmpty))
 			{
-				OfficeId = officeId,
-				Id = beerTapId,
-				BeerName = newKeg.BeerName,
-				TotalVolume = newKeg.TotalVolume,
-				CurrentVolume = newKeg.CurrentVolume
-			};
-			_beerTapService.Replace(newBeerTap);
+				throw new DomainServiceException(
+					"Beer is precious, don't waste it! Can only change kegs when beer is NearlyEmpty or Empty");
+			}
+			else
+			{
+				ReplaceKegDto newKeg = Get(kegId);
+				BeerTapDto newBeerTap = new BeerTapDto()
+				{
+					OfficeId = officeId,
+					Id = beerTapId,
+					BeerName = newKeg.BeerName,
+					TotalVolume = newKeg.TotalVolume,
+					CurrentVolume = newKeg.CurrentVolume
+				};
+				_beerTapService.Replace(newBeerTap);
 
-			return newKeg;
+				return newKeg;
+			}
 		}
 
 		public ReplaceKegDto Update(ReplaceKegDto keg)
 		{
 			_availableKegs[keg.KegId] = keg;
 			return keg;
+		}
+	}
+
+	public class DomainServiceException : Exception
+	{
+		public DomainServiceException(string message) : base(message)
+		{
 		}
 	}
 }

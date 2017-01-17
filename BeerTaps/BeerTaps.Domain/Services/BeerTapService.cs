@@ -36,7 +36,7 @@ namespace BeerTaps.Domain.Services
 			// Create a list of unique BeerTaps with associated OfficeIds
 			IList<BeerTapDto> beerTaps = new List<BeerTapDto>()
 			{
-				new BeerTapDto() {OfficeId = 1, Id = 1, BeerName = "Devil's Elbow IPA", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true, IsGoingDown = false, IsNearlyEmpty = false, IsEmpty = false},
+				new BeerTapDto() {OfficeId = 1, Id = 1, BeerName = "Devil's Elbow IPA", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true},
 				new BeerTapDto() {OfficeId = 1, Id = 2, BeerName = "Ambleside Amber Ale", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true},
 				new BeerTapDto() {OfficeId = 1, Id = 3, BeerName = "Main Street Pilsner", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true},
 				new BeerTapDto() {OfficeId = 2, Id = 1, BeerName = "Rebellion Golden Ale", TotalVolume = 5000, CurrentVolume = 5000, IsFull = true},

@@ -1,4 +1,4 @@
-﻿namespace BeerTaps.ApiServices
+﻿namespace BeerTaps.ApiServices.LinkParameters
 {
 	public class ReplaceKegLinkParameter
 	{

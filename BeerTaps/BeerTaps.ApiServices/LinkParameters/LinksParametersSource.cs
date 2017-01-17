@@ -1,4 +1,4 @@
-﻿namespace BeerTaps.ApiServices
+﻿namespace BeerTaps.ApiServices.LinkParameters
 {
     /// <summary>
     /// The class is used to pass additional parameters to hypermedia links definitions in resource specifications.

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BeerTaps.ApiServices;
+using BeerTaps.ApiServices.LinkParameters;
 using BeerTaps.Model;
 using BeerTaps.Model.Resources;
 using BeerTaps.Model.States;
