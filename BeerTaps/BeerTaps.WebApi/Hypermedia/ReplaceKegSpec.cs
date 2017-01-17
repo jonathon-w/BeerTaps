@@ -11,18 +11,17 @@ namespace BeerTaps.WebApi.Hypermedia
 {
 	public class ReplaceKegSpec : SingleStateResourceSpec<ReplaceKeg, int>
 	{
-		public static ResourceUriTemplate UriReplaceKeg = ResourceUriTemplate.Create("Offices({OfficeId})/Beertaps({BeerTapId})/ReplaceKeg");
+		public static ResourceUriTemplate UriReplaceKeg = ResourceUriTemplate.Create("Offices({OfficeId})/Beertaps({BeerTapId})/ReplaceKeg({id})");
 
 		public override string EntrypointRelation
 		{
-			get { return LinkRelations.BeerTaps.ReplaceKeg; }
+			get { return null; }
 		}
 
 		protected override IEnumerable<ResourceLinkTemplate<ReplaceKeg>> Links()
 		{
 			yield return
-				CreateLinkTemplate<ReplaceKegLinkParameter>(CommonLinkRelations.Self, UriReplaceKeg, c => c.Parameters.OfficeId,
-					c => c.Parameters.BeerTapId);
+				CreateLinkTemplate<ReplaceKegLinkParameter>(CommonLinkRelations.Self, UriReplaceKeg, c => c.Parameters.OfficeId, c => c.Parameters.BeerTapId, c => c.Resource.Id);
 		}
 
 		public override IResourceStateSpec<ReplaceKeg, NullState, int> StateSpec
@@ -33,13 +32,11 @@ namespace BeerTaps.WebApi.Hypermedia
 				{
 					Operations =
 					{
-						Get = ServiceOperations.Get,
 						Post = ServiceOperations.Update
 					},
 					Links =
 					{
-						CreateLinkTemplate<ReplaceKegLinkParameter>(LinkRelations.BeerTaps.ReplaceKeg, UriReplaceKeg, c => c.Parameters.OfficeId, 
-						c => c.Parameters.BeerTapId)
+						CreateLinkTemplate<ReplaceKegLinkParameter>(LinkRelations.BeerTap, BeerTapSpec.UriBeerTapAtOffice, c => c.Parameters.OfficeId, c => c.Parameters.BeerTapId)
 					}
 				};
 			} 

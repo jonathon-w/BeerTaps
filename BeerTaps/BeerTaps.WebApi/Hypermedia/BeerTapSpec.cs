@@ -19,7 +19,7 @@ namespace BeerTaps.WebApi.Hypermedia
 
         public override string EntrypointRelation
         {
-            get { return LinkRelations.BeerTap; }
+            get { return null; /*LinkRelations.BeerTap;*/ }
         }
 
 	    protected override IEnumerable<ResourceLinkTemplate<BeerTap>> Links()

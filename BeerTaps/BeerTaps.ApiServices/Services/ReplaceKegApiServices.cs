@@ -48,6 +48,13 @@ namespace BeerTaps.ApiServices.Services
 			return context.UriParameters.GetByName<int>("BeerTapId").EnsureValue();
 		}
 
+		public Task<ReplaceKeg> GetAsync(int id, IRequestContext context, CancellationToken cancellation)
+		{
+			EnsureIdsAreSetInContext(context);
+
+			return Task.FromResult(_toResourceMapper.Map(_replaceKegService.Get(id)));
+		}
+
 		public Task<IEnumerable<ReplaceKeg>> GetManyAsync(IRequestContext context, CancellationToken cancellation)
 		{
 			EnsureIdsAreSetInContext(context);
@@ -55,7 +62,7 @@ namespace BeerTaps.ApiServices.Services
 			return Task.FromResult(_replaceKegService.GetAll().Select(_toResourceMapper.Map));
 		}
 
-		// Remember to enter the ReplaceKeg parameters in question (OfficeId and Id in particular) into the "Body" tab in Postman
+		// Remember to enter the ReplaceKeg parameters in question (the Id in particular) into the "Body" tab in Postman
 		public Task<ReplaceKeg> UpdateAsync(ReplaceKeg resource, IRequestContext context, CancellationToken cancellation)
 		{
 			EnsureIdsAreSetInContext(context);

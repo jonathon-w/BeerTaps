@@ -32,18 +32,18 @@ namespace BeerTaps.Domain.Services
 		{
 			IList<ReplaceKegDto> availableKegs = new List<ReplaceKegDto>()
 			{
-				new ReplaceKegDto() { Id = 1,	BeerName = "Devil's Elbow IPA", TotalVolume = 5000, CurrentVolume = 5000},
-				new ReplaceKegDto() { Id = 2,	BeerName = "Ambleside Amber Ale", TotalVolume = 5000, CurrentVolume = 5000 },
-				new ReplaceKegDto() { Id = 3,	BeerName = "Main Street Pilsner", TotalVolume = 5000, CurrentVolume = 5000 },
-				new ReplaceKegDto() { Id = 4,	BeerName = "Rebellion Golden Ale", TotalVolume = 5000, CurrentVolume = 5000 },
-				new ReplaceKegDto() { Id = 5,	BeerName = "Steamworks Heroica Red Ale", TotalVolume = 5000, CurrentVolume = 5000 },
-				new ReplaceKegDto() { Id = 6,	BeerName = "33 Acres of Darkness", TotalVolume = 5000, CurrentVolume = 5000 },
-				new ReplaceKegDto() { Id = 7,	BeerName = "Affligem Blonde", TotalVolume = 5000, CurrentVolume = 5000 },
-				new ReplaceKegDto() { Id = 8,	BeerName = "Pirate Life Brewing Double India Pale Ale", TotalVolume = 5000, CurrentVolume = 5000 },
-				new ReplaceKegDto() { Id = 9,	BeerName = "Fat Pauly's Desert Rose", TotalVolume = 5000, CurrentVolume = 5000 },
-				new ReplaceKegDto() { Id = 10,	BeerName = "Xavierbier's Message in a Bottle Black IPA", TotalVolume = 5000, CurrentVolume = 5000 },
-				new ReplaceKegDto() { Id = 11,	BeerName = "Nectarous Dry-Hopper Sour", TotalVolume = 5000, CurrentVolume = 5000 },
-				new ReplaceKegDto() { Id = 12,	BeerName = "Stonecutter Scotch Ale", TotalVolume = 5000, CurrentVolume = 5000 }
+				new ReplaceKegDto() { KegId = 1,	BeerName = "Devil's Elbow IPA", TotalVolume = 5000, CurrentVolume = 5000},
+				new ReplaceKegDto() { KegId = 2,	BeerName = "Ambleside Amber Ale", TotalVolume = 5000, CurrentVolume = 5000 },
+				new ReplaceKegDto() { KegId = 3,	BeerName = "Main Street Pilsner", TotalVolume = 5000, CurrentVolume = 5000 },
+				new ReplaceKegDto() { KegId = 4,	BeerName = "Rebellion Golden Ale", TotalVolume = 5000, CurrentVolume = 5000 },
+				new ReplaceKegDto() { KegId = 5,	BeerName = "Steamworks Heroica Red Ale", TotalVolume = 5000, CurrentVolume = 5000 },
+				new ReplaceKegDto() { KegId = 6,	BeerName = "33 Acres of Darkness", TotalVolume = 5000, CurrentVolume = 5000 },
+				new ReplaceKegDto() { KegId = 7,	BeerName = "Affligem Blonde", TotalVolume = 5000, CurrentVolume = 5000 },
+				new ReplaceKegDto() { KegId = 8,	BeerName = "Pirate Life Brewing Double India Pale Ale", TotalVolume = 5000, CurrentVolume = 5000 },
+				new ReplaceKegDto() { KegId = 9,	BeerName = "Fat Pauly's Desert Rose", TotalVolume = 5000, CurrentVolume = 5000 },
+				new ReplaceKegDto() { KegId = 10,	BeerName = "Xavierbier's Message in a Bottle Black IPA", TotalVolume = 5000, CurrentVolume = 5000 },
+				new ReplaceKegDto() { KegId = 11,	BeerName = "Nectarous Dry-Hopper Sour", TotalVolume = 5000, CurrentVolume = 5000 },
+				new ReplaceKegDto() { KegId = 12,	BeerName = "Stonecutter Scotch Ale", TotalVolume = 5000, CurrentVolume = 5000 }
 			};
 
 			foreach (var keg in availableKegs)
@@ -54,7 +54,7 @@ namespace BeerTaps.Domain.Services
 
 		public ReplaceKegDto Add(ReplaceKegDto keg)
 		{
-			_availableKegs.Add(keg.Id, keg);
+			_availableKegs.Add(keg.KegId, keg);
 			return keg;
 		}
 
@@ -91,7 +91,7 @@ namespace BeerTaps.Domain.Services
 
 		public ReplaceKegDto Update(ReplaceKegDto keg)
 		{
-			_availableKegs[keg.Id] = keg;
+			_availableKegs[keg.KegId] = keg;
 			return keg;
 		}
 	}

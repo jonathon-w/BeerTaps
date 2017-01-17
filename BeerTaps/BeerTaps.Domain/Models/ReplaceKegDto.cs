@@ -2,7 +2,7 @@
 {
 	public class ReplaceKegDto
 	{
-		public int Id { get; set; }
+		public int KegId { get; set; }
 		/// <summary>
 		/// BeerName of the beer in this keg
 		/// </summary>
